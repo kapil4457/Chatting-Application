@@ -5,12 +5,12 @@ import Home from './components/Home';
 import ChatPage from './components/ChatPage';
 function App() {
   return (
-   <>
-    <Routes>
+   <div className='App'>
+    <Routes >
       <Route path='/' element={<Home/>} />
       <Route path='/chats' element={<ChatPage/>}/>
     </Routes>
-   </>
+   </div>
   );
 }
 

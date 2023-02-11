@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap");
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  /* background: url("https://static.vecteezy.com/system/resources/previews/002/188/833/non_2x/chat-wallpaper-social-media-message-background-copy-space-for-a-text-vector.jpg"); */
+  /* background: url("https://cdn.allthings.how/wp-content/uploads/2021/12/allthings.how-how-to-dim-chat-wallpaper-on-whatsapp-dimming.png"); */
+  background: url("https://marketplace.canva.com/EAEWlHhQQxc/1/0/1600w/canva-blue-monster-funny-and-quirky-desktop-wallpaper-qoU0v_zhFdU.jpg");
+  background-size: cover;
+  background-position: center;
+}
