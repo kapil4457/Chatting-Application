@@ -129,5 +129,25 @@ exports.renameGroup = (async(req,res,next)=>{
 })
 
 exports.AddToGroup = (async(req,res,next)=>{
+try{
+    const {chatId , userId}  = req.body;
+    const added = Chat.findByIdAndUpdate(chatId , 
+        {
+            $push : {users : userId}
+        },
+        {
+            new : true
+        }
+        ).populate("users" , "-password").populate("groupAdmin" , "-password")
 
+
+        if(!added){
+            return res.status(404).end("Chat Not Found")
+        }else{
+            return res.json(added)
+        }
+
+}catch(err){
+    return res.status(400).send(err.message)
+}
 })
