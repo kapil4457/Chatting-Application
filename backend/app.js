@@ -10,10 +10,12 @@ app.use(express.json())  // To accept json
 
 const chatRoutes = require('./routes/chatRoute.js')
 const userRoute = require('./routes/userRoute')
+const messageRoute = require('./routes/messageRoute.js')
 
 
 app.use('/api/v1/' , chatRoutes);
 app.use('/api/v1/' , userRoute);
+app.use('/api/v1/' , messageRoute);
 
 
 
