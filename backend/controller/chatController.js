@@ -19,10 +19,10 @@ exports.accessChat = (async(req,res,next)=>{
                 users : {$elemMatch : {$eq:userId}}
             }
         ]
-       }).populate("users" , "-password").populate("latestMessage")
+       }).populate("users" , "-password").populate("latestChat")
     
        isChat = await User.populate(isChat , {
-        path : 'latestMessage.sender',
+        path : 'latestChat.sender',
         select : "name pic email"
        })
 
@@ -55,11 +55,11 @@ exports.fetchChats = (async(req,res,next)=>{
         Chat.find({users : {$elemMatch : {$eq:req.user._id}}})
         .populate("users","-password")
         .populate("groupAdmin","-password")
-        .populate("latestMessage")
+        .populate("latestChat")
         .sort({ updatedAt : -1})
         .then(async(results)=>{
             results = await User.populate(results , {
-                path : "latestMessage.sender",
+                path : "latestChat.sender",
                 select : "name pic email"
             })
 
@@ -131,7 +131,7 @@ exports.renameGroup = (async(req,res,next)=>{
 exports.AddToGroup = (async(req,res,next)=>{
 try{
     const {chatId , userId}  = req.body;
-    const added = Chat.findByIdAndUpdate(chatId , 
+    const added =await Chat.findByIdAndUpdate(chatId , 
         {
             $push : {users : userId}
         },
@@ -154,7 +154,7 @@ try{
 exports.removeFromGroup = (async(req,res,next)=>{
 try{
     const {chatId , userId}  = req.body;
-    const removed = Chat.findByIdAndUpdate(chatId , 
+    const removed =await Chat.findByIdAndUpdate(chatId , 
         {
             $pull : {users : userId}
         },
