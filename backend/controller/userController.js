@@ -61,3 +61,24 @@ exports.registerUser = (async(req,res)=>{
     }
 
 })
+
+
+exports.allUsers = (async(req,res,next)=>{
+    try{
+
+        const keyword = req.query.search ? {
+            $or : [
+        {name : {$regex:req.query.search , $options : "i"}},
+        {email : {$regex:req.query.search , $options : "i"}},
+    ]
+} : {}
+
+
+const users = await User.find(keyword).find({_id: {$ne:req.user._id}});
+res.status(200).send(users);
+return;
+}catch(err){
+    res.status(400).send(err.message);
+    return;
+}
+})
