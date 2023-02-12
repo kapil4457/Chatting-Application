@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors")
 require("dotenv").config();
+const {errorHandler, notFound} =require('./middleware/errorMiddleware')
 
 
 app.use(cors());
@@ -14,5 +15,9 @@ const userRoute = require('./routes/userRoute')
 app.use('/api/v1/' , chatRoutes);
 app.use('/api/v1/' , userRoute);
 
+
+
+app.use(notFound);
+app.use(errorHandler)
 
 module.exports = app;
