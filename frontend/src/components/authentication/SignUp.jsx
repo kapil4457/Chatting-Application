@@ -50,7 +50,7 @@ const SignUp = () => {
         },
       };
       const { data } = await axios.post(
-        "/api/v1/user",
+        "/api/v1/register",
         {
           name,
           email,
@@ -73,7 +73,7 @@ const SignUp = () => {
     } catch (error) {
       toast({
         title: "Error Occured!",
-        description: error.response.data.message,
+        description: error.response.data,
         status: "error",
         duration: 5000,
         isClosable: true,
@@ -95,20 +95,21 @@ const SignUp = () => {
       });
       return;
     }
-    console.log(pics);
+    // console.log(pics);
     if (pics.type === "image/jpeg" || pics.type === "image/png") {
       const data = new FormData();
       data.append("file", pics);
-      data.append("upload_preset", "chat-app");
-      data.append("cloud_name", "piyushproj");
-      fetch("https://api.cloudinary.com/v1_1/piyushproj/image/upload", {
+      data.append("upload_preset", "Online_Chatting");
+      data.append("cloud_name", "ds82kuoet");
+      fetch("https://api.cloudinary.com/v1_1/ds82kuoet/image/upload", {
         method: "post",
         body: data,
       })
         .then((res) => res.json())
         .then((data) => {
+          // console.log("data", data);
           setPic(data.url.toString());
-          console.log(data.url.toString());
+          // console.log(data.url.toString());
           setPicLoading(false);
         })
         .catch((err) => {

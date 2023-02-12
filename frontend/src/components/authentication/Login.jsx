@@ -39,7 +39,7 @@ const Login = () => {
       };
 
       const { data } = await axios.post(
-        "/api/v1/user/login",
+        "/api/v1/login",
         { email, password },
         config
       );
@@ -57,13 +57,14 @@ const Login = () => {
     } catch (error) {
       toast({
         title: "Error Occured!",
-        description: error.response.data.message,
+        description: error.response.data,
         status: "error",
         duration: 5000,
         isClosable: true,
         position: "bottom",
       });
       setLoading(false);
+      console.clear();
     }
   };
 
