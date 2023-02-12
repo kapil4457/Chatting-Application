@@ -107,3 +107,27 @@ exports.createGroup = (async(req,res,next)=>{
        return res.status(400).send(err.message)
     }
 })
+
+exports.renameGroup = (async(req,res,next)=>{
+    try{
+    const {chatId , chatName} = req.body;
+    const updatedChat = await Chat.findByIdAndUpdate(chatId , 
+        {
+        chatName : chatName
+    },{
+        new:true
+    }).populate("users","-password").populate("groupAdmin" , "-password")
+
+    if(!updatedChat){
+        return res.status(400).send("Chat Not  Found")
+    }
+    return res.json({updatedChat})
+    }
+    catch(err){
+        return res.status(400).send(err.message)
+    }
+})
+
+exports.AddToGroup = (async(req,res,next)=>{
+
+})
