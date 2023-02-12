@@ -151,3 +151,26 @@ try{
     return res.status(400).send(err.message)
 }
 })
+exports.removeFromGroup = (async(req,res,next)=>{
+try{
+    const {chatId , userId}  = req.body;
+    const removed = Chat.findByIdAndUpdate(chatId , 
+        {
+            $pull : {users : userId}
+        },
+        {
+            new : true
+        }
+        ).populate("users" , "-password").populate("groupAdmin" , "-password")
+
+
+        if(!removed){
+            return res.status(404).end("Chat Not Found")
+        }else{
+            return res.json(removed)
+        }
+
+}catch(err){
+    return res.status(400).send(err.message)
+}
+})
