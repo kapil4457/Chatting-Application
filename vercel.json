@@ -1,0 +1,6 @@
+{
+    "version": 2,
+    "name": "bale-bale-chatting",
+    "builds": [{ "src": "server.js", "use": "@vercel/node" }],
+    "routes": [{ "src": "/backend/(.*)", "dest": "/server.js" }]
+  }
