@@ -50,7 +50,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
       setLoading(true);
 
       const { data } = await axios.get(
-        `/api/message/${selectedChat._id}`,
+        `/api/v1/${selectedChat._id}`,
         config
       );
       setMessages(data);
@@ -81,7 +81,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         };
         setNewMessage("");
         const { data } = await axios.post(
-          "/api/message",
+          "/api/v1/send/message",
           {
             content: newMessage,
             chatId: selectedChat,
@@ -123,7 +123,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   useEffect(() => {
     socket.on("message recieved", (newMessageRecieved) => {
       if (
-        !selectedChatCompare || // if chat is not selected or doesn't match current chat
+        !selectedChatCompare ||
         selectedChatCompare._id !== newMessageRecieved.chat._id
       ) {
         if (!notification.includes(newMessageRecieved)) {
@@ -204,8 +204,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             bg="#E8E8E8"
             w="100%"
             h="100%"
+            
             borderRadius="lg"
             overflowY="hidden"
+            style={{justifyContent:"center"}}
           >
             {loading ? (
               <Spinner
@@ -250,11 +252,13 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
           </Box>
         </>
       ) : (
+        <>
         <Box d="flex" alignItems="center" justifyContent="center" h="100%" style={{display:"flex"}}>
           <Text fontSize="3xl" pb={3} fontFamily="Work sans">
             Click on a user to start chatting
           </Text>
         </Box>
+        </>
       )}
     </>
   );
