@@ -11,6 +11,7 @@
     "socket.io": "^4.6.0"
   },
   "scripts": {
-    "start": "nodemon backend/server.js   "
+    "start": "nodemon backend/server.js",
+    "build" : " npm install --prefix frontend && npm run build --prefix frontend && nodemon backend/server.js"
   }
 }
