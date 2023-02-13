@@ -12,7 +12,7 @@
   },
   "scripts": {
     "start": "nodemon backend/server.js",
-    "build" : "npm install && npm run build --prefix frontend --force"
+    "build" : "npm install --force && npm run build --prefix frontend"
 
   }
 }
