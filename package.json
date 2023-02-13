@@ -12,6 +12,7 @@
   },
   "scripts": {
     "start": "nodemon backend/server.js",
-    "build" : "nodemon backend/server.js"
+    "build" : "npm run build --prefix frontend"
+
   }
 }
